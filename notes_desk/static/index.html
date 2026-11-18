@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Заметки</title>
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body>
+  <header>
+    <h1>Заметки</h1>
+    <p id="status">Откройте папку.</p>
+  </header>
+  <div class="layout">
+    <aside>
+      <form id="folder-form">
+        <label for="folder-path">Папка</label>
+        <input id="folder-path" name="path" type="text" placeholder="/путь/к/заметкам" autocomplete="off">
+        <div class="row">
+          <button type="submit">Открыть</button>
+          <button id="pick" type="button">Выбрать</button>
+        </div>
+      </form>
+      <section>
+        <h2>Файлы</h2>
+        <p id="files-note" class="quiet"></p>
+        <ul id="files"></ul>
+      </section>
+      <details>
+        <summary>Модель</summary>
+        <form id="settings-form">
+          <label for="base-url">Адрес API</label>
+          <input id="base-url" name="baseUrl" type="url" required>
+          <label for="model">Модель</label>
+          <input id="model" name="model" type="text" placeholder="имя модели у вашего API">
+          <label for="api-key">Ключ</label>
+          <input id="api-key" name="apiKey" type="password" autocomplete="off">
+          <p class="quiet">Пустое поле ключа при сохранении его не стирает.</p>
+          <div class="row">
+            <button type="submit">Сохранить</button>
+            <button id="clear-key" type="button">Сбросить ключ</button>
+          </div>
+        </form>
+      </details>
+    </aside>
+    <section class="panel" id="preview-panel">
+      <h2>Файл</h2>
+      <p id="preview-name" class="quiet">Выберите файл слева.</p>
+      <pre id="preview-text" hidden></pre>
+      <img id="preview-image" alt="" hidden>
+    </section>
+    <section class="panel chat">
+      <div class="chat-head">
+        <h2>Разговор</h2>
+        <button id="reset" type="button">Новый</button>
+      </div>
+      <div id="transcript"></div>
+      <form id="chat-form">
+        <label for="message" class="visually-hidden">Сообщение</label>
+        <textarea id="message" rows="3" placeholder="Что сделать с заметками"></textarea>
+        <div class="row">
+          <button type="submit">Отправить</button>
+          <button id="suggest" type="button">Какие заметки есть</button>
+        </div>
+      </form>
+    </section>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
