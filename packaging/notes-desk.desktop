@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Заметки
+Comment=Локальный harness для текстовых заметок
+Exec=notes-desk
+Terminal=false
+Categories=Office;
+StartupNotify=true

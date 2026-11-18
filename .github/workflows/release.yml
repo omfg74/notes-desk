@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Tag matches the package version
+        run: python .github/release_version.py
+      - name: Install and check
+        run: |
+          python -m pip install .
+          notes-desk --check
+      - name: Build package
+        run: |
+          python -m pip install build
+          python -m build
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          tag="${GITHUB_REF_NAME}"
+          previous="$(git tag --list 'v*' --sort=-v:refname | awk -v current="$tag" '$0 != current { print; exit }')"
+          if [ -n "$previous" ]; then
+            notes="$(git log --pretty=format:'- %s' "${previous}..HEAD")"
+          else
+            notes="$(git log --pretty=format:'- %s')"
+          fi
+          if [ -z "$notes" ]; then
+            echo "Нет коммитов для описания релиза" >&2
+            exit 1
+          fi
+          gh release create "$tag" dist/* --title "$tag" --notes "$notes" --verify-tag

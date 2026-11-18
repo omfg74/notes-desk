@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 .env
 *.notes-desk-tmp
+build/
+dist/
+*.egg-info/

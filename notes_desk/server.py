@@ -345,7 +345,7 @@ def _query_path(query: str) -> str:
 
 def serve(host: str, port: int) -> None:
     server = ThreadingHTTPServer((host, port), Handler)
-    print(f"Заметки открыты: http://{host}:{port}")
+    print(f"Заметки открыты: http://{host}:{port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

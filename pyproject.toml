@@ -4,11 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "notes-desk"
-version = "0.1.0"
+version = "0.2.0"
 description = "Локальный harness для текстовых заметок"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Alexander Podshivalov" }]
+dependencies = ["pywebview>=6.2.1,<7"]
 
 [project.scripts]
 notes-desk = "notes_desk.__main__:main"
